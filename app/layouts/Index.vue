@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="sbox">
         <el-container>
             <el-header>
                 <el-menu
@@ -43,10 +43,17 @@
         margin: 0;
         padding: 0;
     }
-    .el-header{
-        padding: 0;
-    }
-    .el-footer{
-        text-align: center;
+    .sbox{
+        position: relative;
+        .el-header{
+            padding: 0;
+        }
+        .el-footer{
+            position: absolute;
+            left: 50%;
+            margin-left: -80px;
+            top: 60px;
+            text-align: center;
+        }
     }
 </style>

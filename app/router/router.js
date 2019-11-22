@@ -15,7 +15,8 @@ const router = new VueRouter({
                     name:'index',
                     component: () => import('../views/Index.vue'),
                     meta:{
-                        'A':'index'
+                        'A':'index',
+                        'B':'index'
                     }
                 },
                 {
@@ -31,7 +32,8 @@ const router = new VueRouter({
                             name: 'jinhuo',
                             component: () => import('../views/cg-jinhuo/jinhuo.vue'),
                             meta:{
-                                'A':'caigou'
+                                'A':'caigou',
+                                'B':'jinhuo'
                             }
                         },
                         {
@@ -39,7 +41,8 @@ const router = new VueRouter({
                             name: 'richang',
                             component: () => import('../views/cg-richang/richang.vue'),
                             meta:{
-                                'A':'caigou'
+                                'A':'caigou',
+                                'B':'richang'
                             }
                         },
                         {
@@ -47,7 +50,8 @@ const router = new VueRouter({
                             name: 'tuihuo',
                             component: () => import('../views/cg-tuihuo/tuihuo.vue'),
                             meta:{
-                                'A':'caigou'
+                                'A':'caigou',
+                                'B':'tuihuo'
                             }
                         }
                     ]
@@ -56,6 +60,10 @@ const router = new VueRouter({
                     path: 'caiwu',
                     name: 'caiwu',  
                     component: () => import('../layouts/Side.vue'),
+                    meta:{
+                        'A':'caiwu',
+                        'B':'caiwu'
+                    },
                     redirect:{
                         'name':'pingzheng'
                     },
@@ -65,15 +73,17 @@ const router = new VueRouter({
                             name: 'pingzheng',
                             component: () => import('../views/cw-pingzheng/pingzheng.vue'),
                             meta:{
-                                'A':'caiwu'
+                                'A':'caiwu',
+                                'B':'pingzheng'
                             }
                         },
                         {
-                            path: 'guanli',
-                            name: 'guanli',
+                            path: 'zhuanxiangyewu',
+                            name: 'zhuanxiangyewu',
                             component: () => import('../views/cw-guanli/guanli.vue'),
                             meta:{
-                                'A':'caiwu'
+                                'A':'caiwu',
+                                'B':'zhuanxiangyewu'
                             }
                         }
                     ]

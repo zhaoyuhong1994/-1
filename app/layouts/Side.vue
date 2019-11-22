@@ -1,11 +1,13 @@
 <template>
     <div class="side_box">
         <el-menu
-            :default-active="$route.meta.A"
+            :default-active="A"
             class="el-menu-vertical-demo"
             background-color="orange"
             text-color="#fff"
-            active-text-color="skyblue">
+            active-text-color="skyblue"
+            @select="selecthan"
+            v-show="A=='caigou'">
             <el-menu-item index="caigou">
                 <i class="el-icon-menu"></i>
                 <span slot="title">日常采购</span>
@@ -20,26 +22,37 @@
             </el-menu-item>
         </el-menu>
          <el-menu
-            default-active="caigou"
+            :default-active="B"
             class="el-menu-vertical-demo"
             background-color="orange"
             text-color="#fff"
-            active-text-color="skyblue">
-            <el-menu-item index="caigou">
+            active-text-color="skyblue"
+            @select="selecthan"
+            v-show="A=='caiwu'">
+            <el-menu-item index="pingzheng">
                 <i class="el-icon-menu"></i>
                 <span slot="title">凭证管理</span>
             </el-menu-item>
-            <el-menu-item index="jinhuo">
+            <el-menu-item index="zhuanxiangyewu">
                 <i class="el-icon-menu"></i>
                 <span slot="title">专项业务管理</span>
             </el-menu-item>
         </el-menu>
         <div class="content">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/index/index' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item :to="{ path: '/index/caiwu/guanli'}"><a href="/">活动管理</a></el-breadcrumb-item>
-                <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-                <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+                <el-breadcrumb-item>
+                    <router-link class="biaoji" :to="{ path: '/index/index' }">首页</router-link>
+                </el-breadcrumb-item>
+                <el-breadcrumb-item>
+                    <router-link :to="{ name: A }" class="biaoji">
+                        {{A_chinse}}
+                    </router-link>
+                </el-breadcrumb-item>
+                <el-breadcrumb-item>
+                    <router-link :to="{ name: B }" class="biaoji" >
+                        {{B_chinese}}
+                    </router-link>
+                </el-breadcrumb-item>
             </el-breadcrumb>
             <router-view />
         </div>
@@ -48,8 +61,44 @@
 
 <script>
     export default {
-        created(){
-            console.log(this.$route.meta.A)
+        data() {
+            return {
+            }
+        },
+        computed:{
+            A(){
+                return this.$route.meta.A;
+            },
+            B(){
+                return this.$route.meta.B;
+            },
+            A_chinse(){
+                if(this.A=='caiwu'){
+                    return '财务';
+                }else if(this.A == 'caigou'){
+                    return '采购';
+                }
+            },
+            B_chinese(){
+                if(this.B == 'jinhuo') {
+                    return '进货管理';
+                }else if(this.B == 'richang') {
+                    return '日常管理';
+                }else if(this.B == 'tuihuo') {
+                    return '退货管理';
+                }else if(this.B == 'pingzheng') {
+                    return '凭证管理';
+                }else if(this.B == 'zhuanxiangyewu') {
+                    return '专项业务管理';
+                }
+            }
+        },
+        methods:{
+            selecthan(v){
+                this.$router.push({
+                    name : v
+                })
+            }
         }
     }
 </script>
@@ -63,12 +112,6 @@
         position: relative;
         .el-menu-vertical-demo{
             width: 200px;
-                .el-menu-item-group{
-                    background: rgb(81, 49, 168);
-                        .el-menu-item{
-                        background-color: rgb(144, 247, 153) !important;
-                }
-            }
         }
         .content{
             position: absolute;
@@ -77,6 +120,10 @@
             padding: 10px;
             .el-breadcrumb{
                 margin-bottom: 10px;
+            }
+            .biaoji{
+                font-weight: bold !important;
+                cursor: pointer !important;
             }
         }
     }
